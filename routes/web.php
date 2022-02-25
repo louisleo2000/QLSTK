@@ -19,9 +19,12 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('layouts.dashboard.layout');
+    return view('pages.home');
 })->middleware(['auth'])->name('dashboard');
 
+Route::get('/members', function () {
+    return view('pages.members');
+})->middleware(['auth'])->name('members');
 
 
 // Route::post('/login', [HomeController::class,'store']);

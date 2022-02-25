@@ -16,15 +16,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-
-    <!--     Fonts and icons     -->
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
-    <!-- CSS Files -->
-    <link href="{{ asset('/admin/css/bootstrap.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('/admin/css/light-bootstrap-dashboard.css?v=2.0.0') }}" rel="stylesheet" />
-
-    <link href="{{ asset('/admin/css/demo.css') }}" rel="stylesheet" />
+    @include('layouts.head-style')
 </head>
 
 <body class="font-sans antialiased">
@@ -70,5 +62,5 @@
 
     });
 </script>
-
+@include('layouts.script-app')
 </html>
