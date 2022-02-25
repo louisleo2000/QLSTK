@@ -9,7 +9,7 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="http://127.0.0.1:8000/add-user">
+        <form method="POST" action="http://127.0.0.1:8000/register">
             @csrf
 
             <!-- Name -->
