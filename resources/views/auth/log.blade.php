@@ -89,34 +89,26 @@
             <div class="row justify-content-center">
                 <div class="col-lg-5 col-md-7">
                     <div class="card bg-secondary shadow border-0">
-                        {{-- <div class="card-header bg-transparent pb-5">
-              <div class="pt-0 text-uppercase h4 mb-0 text-center"><small>Đăng nhập</small></div>
-              <div class="btn-wrapper text-center">
-                <a href="#" class="btn btn-neutral btn-icon">
-                  <span class="btn-inner--icon"><img src="{{asset('/admin/img/icons/common/github.svg')}}"></span>
-                  <span class="btn-inner--text">Github</span>
-                </a>
-                <a href="#" class="btn btn-neutral btn-icon">
-                  <span class="btn-inner--icon"><img src="{{ asset('/admin/img/icons/common/google.svg')}}"></span>
-                  <span class="btn-inner--text">Google</span>
-                </a>
-              </div>
-            </div> --}}
                         <div class="card-body px-lg-5 py-lg-5">
                             <div class="text-center  mb-4">
                                 <p class="h3">ĐĂNG NHẬP</p>
                             </div>
+                            <!-- Session Status -->
+                            <x-auth-session-status class="mb-4" :status="session('status')" />
 
+                            <!-- Validation Errors -->
+                            <x-auth-validation-errors class="mb-4 text-red" :errors="$errors" />
 
-                            <form method="POST" action="{{ route('login') }}">
+                            <form id="loginForm" method="POST" action="{{ route('login') }}">
                                 @csrf
                                 <div class="form-group mb-3">
                                     <div class="input-group input-group-alternative">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                                         </div>
-                                        <input class="form-control" id="email" name="email" :value="old('email')"
-                                            required autofocus placeholder="Email" type="email">
+                                        <input class="form-control" id="email" name="email"
+                                            value="{{ old('email') }}" required autofocus placeholder="Email"
+                                            type="email">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -129,7 +121,8 @@
                                     </div>
                                 </div>
                                 <div class="custom-control custom-control-alternative custom-checkbox">
-                                    <input class="custom-control-input"id="remember_me" type="checkbox" name="remember">
+                                    <input class="custom-control-input" id=" customCheckLogin" type="checkbox"
+                                        name="remember">
                                     <label class="custom-control-label" for=" customCheckLogin">
                                         <span class="text-muted">Nhớ đăng nhập</span>
                                     </label>
@@ -143,11 +136,13 @@
                     <div class="row mt-3">
                         <div class="col-6">
                             @if (Route::has('password.request'))
-                            <a href="{{ route('password.request') }}" class="text-light"><small>Quên mật khẩu?</small></a>
+                                <a href="{{ route('password.request') }}" class="text-light"><small>Quên mật
+                                        khẩu?</small></a>
                             @endif
                         </div>
                         <div class="col-6 text-right">
-                            <a href="{{ route('register') }}" class="text-light"><small>Tạo tài khoản mới</small></a>
+                            <a href="{{ route('register') }}" class="text-light"><small>Tạo tài khoản
+                                    mới</small></a>
                         </div>
                     </div>
                 </div>
@@ -188,5 +183,6 @@
 </body>
 
 @include('layouts.script-app')
+
 
 </html>

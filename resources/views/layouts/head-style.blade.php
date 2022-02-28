@@ -15,3 +15,20 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 <!-- CSS Files -->
 <link href="{{asset('/admin/css/argon-dashboard.css?v=1.1.2')}}" rel="stylesheet" />
+{{-- DATA TABLES --}}
+<link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+<link href="{{ asset('/css/demo.css" rel="stylesheet')}}" />
+<link href="{{ asset('css/light-bootstrap-dashboard.css?v=2.0.0 ')}}" rel="stylesheet" />
+
+<script src="https://balkan.app/js/FamilyTree.js"></script>
+ <!--   Core   -->
+ <script src="{{ asset('/admin/js/plugins/jquery/dist/jquery.min.js') }}"></script>
+ <script src="{{ asset('/admin/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('js/familytree.js') }}"></script>
+
+
+
+
+

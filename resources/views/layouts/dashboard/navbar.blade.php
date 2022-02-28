@@ -94,29 +94,42 @@
                     </div>
                 </div>
             </form>
-            <!-- Navigation -->
-            <ul class="navbar-nav">
-                <li class="nav-item  active ">
-                    <a class="nav-link  active " href="{{ route('dashboard') }}">
-                        <i class="ni ni-tv-2 text-primary"></i> Trang chủ
+            @if (isset($active))
+                <!-- Navigation -->
+                <ul class="navbar-nav">
+                    @if ($active == 1)
+                        <li class="nav-item  active ">
+                            <a class="nav-link  " href="#">
+                            @else
+                        <li class="nav-item ">
+                            <a class="nav-link " href="{{ route('home') }}">
+                    @endif
+
+                    <i class="ni ni-tv-2 text-primary"></i> Trang chủ
                     </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link " href="{{ route('members') }}">
-                        <i class="fas fa-users text-blue"></i> Thành viên
+                    </li>
+                    @if ($active == 2)
+                        <li class="nav-item  active ">
+                            <a class="nav-link  " href="#">
+                            @else
+                        <li class="nav-item ">
+
+                            <a class="nav-link " href="{{ route('members') }}">
+                    @endif
+                    <i class="fas fa-users text-blue"></i> Thành viên
                     </a>
-                </li>
-                {{-- <li class="nav-item">
+                    </li>
+                    {{-- <li class="nav-item">
                     <a class="nav-link " href="./examples/maps.html">
                         <i class="ni ni-pin-3 text-orange"></i> Maps
                     </a>
                 </li> --}}
-                <li class="nav-item">
-                    <a class="nav-link " href="./examples/profile.html">
-                        <i class="ni ni-single-02 text-orange"></i> Thông tin người dùng
-                    </a>
-                </li>
-                {{-- <li class="nav-item">
+                    <li class="nav-item">
+                        <a class="nav-link " href="./examples/profile.html">
+                            <i class="ni ni-single-02 text-orange"></i> Thông tin người dùng
+                        </a>
+                    </li>
+                    {{-- <li class="nav-item">
                     <a class="nav-link " href="./examples/tables.html">
                         <i class="ni ni-bullet-list-67 text-red"></i> Tables
                     </a>
@@ -131,7 +144,8 @@
                         <i class="ni ni-circle-08 text-pink"></i> Register
                     </a>
                 </li> --}}
-            </ul>
+                </ul>
+            @endif
             <!-- Divider -->
             <hr class="my-3">
             <!-- Heading -->
@@ -157,7 +171,7 @@
                     </a>
                 </li>
             </ul>
-           
+
         </div>
     </div>
 </nav>
