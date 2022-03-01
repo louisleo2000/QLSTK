@@ -13,7 +13,7 @@ class HomeController extends Controller
     {
         $data = array(
             'title' => 'Trang chủ',
-            'active' => 1
+            'active' => 1,
         );
         return view('pages.home', $data);
     }

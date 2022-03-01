@@ -503,7 +503,7 @@ demo = {
     showNotification: function(from, align,color,message) {
        
         $.notify({
-            icon: "nc-icon nc-app",
+            icon: "",
             message: message
 
         }, {

@@ -15,10 +15,9 @@ class Members extends Model
         'dod',
         'gender',
         'img',
-        'level',
         'father_id',
         'mother_id',
-        'couple_id'
+        'couple_id',
     ];
     public function familyTree()
     {

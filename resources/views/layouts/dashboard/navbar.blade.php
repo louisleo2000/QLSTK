@@ -94,15 +94,17 @@
                     </div>
                 </div>
             </form>
-            @if (isset($active))
+            
                 <!-- Navigation -->
                 <ul class="navbar-nav">
+                    @if (isset($active))
                     @if ($active == 1)
                         <li class="nav-item  active ">
                             <a class="nav-link  " href="#">
                             @else
                         <li class="nav-item ">
                             <a class="nav-link " href="{{ route('home') }}">
+                    @endif
                     @endif
 
                     <i class="ni ni-tv-2 text-primary"></i> Trang chủ
@@ -145,7 +147,7 @@
                     </a>
                 </li> --}}
                 </ul>
-            @endif
+            
             <!-- Divider -->
             <hr class="my-3">
             <!-- Heading -->

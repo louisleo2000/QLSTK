@@ -15,8 +15,7 @@ class FamilyTree extends Component
         $count = Auth::user()->familyTree->count();
         if($count >0){
             $mb = Auth::user()->familyTree->first()->members;
-        }
-       
+        }      
         $data = array(
           
             'members' => $mb,  

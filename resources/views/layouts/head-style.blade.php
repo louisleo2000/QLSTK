@@ -1,5 +1,6 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <title>
   Quản lý gia phả
 </title>
@@ -27,7 +28,9 @@
  <script src="{{ asset('/admin/js/plugins/jquery/dist/jquery.min.js') }}"></script>
  <script src="{{ asset('/admin/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('js/familytree.js') }}"></script>
-
+{{-- Select 2 --}}
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 
 
