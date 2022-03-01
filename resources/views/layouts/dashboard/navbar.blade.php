@@ -6,7 +6,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <!-- Brand -->
-        <a class="navbar-brand pt-0 text-uppercase h4 mb-0" href="./index.html">
+        <a class="navbar-brand pt-0 text-uppercase h4 mb-0" href="/">
             Quản lý gia phả
             {{-- <img src="{{ asset('/admin/img/brand/blue.png') }}" class="navbar-brand-img" alt="..."> --}}
         </a>

@@ -127,9 +127,9 @@
 <script>
     $(document).ready(function() {
         $('.js-select').select2();
-        $('#couple_id').val(["0"]).change();
+        
     })
-    
+
     $(document).ready(function() {
         $('#dead').change(function() {
             if ($(this).is(":checked")) {

@@ -33,7 +33,7 @@ class MembersController extends Controller
             //get member female
             $female = Members::where('family_tree_id', '=', Auth::user()->familyTree[0]->id)->where('gender', '=', 'female')->get();
 
-            $couple = Members::all();
+            $couple = Members::where('family_tree_id', '=', Auth::user()->familyTree[0]->id)->get();
         }
 
         $data = array(
@@ -94,6 +94,7 @@ class MembersController extends Controller
 
     public function store(Request $request)
     {
+
         //validate request
         $dod = null;
         $father_id = null;
@@ -105,80 +106,79 @@ class MembersController extends Controller
             'gender' => 'required',
         ]);
         // dd($request['couple_id']);
-        // if ($request->ajax()) {
+        if ($request->ajax() &&  Auth::user()->familyTree->count()>0) {
+
+            $mb = Members::where('family_tree_id', '=', Auth::user()->familyTree[0]->id)->where('name', '=', $request['name'])->where('dob', '=', $request['dob'])->where('gender', '=', $request['gender'])->get();
+            $img = "https://icon-library.com/images/no-user-image-icon/no-user-image-icon-27.jpg";
+            if ($request->hasFile('img')) {
+                //get name and port of server
+                $serverName = "http://" . $_SERVER['SERVER_NAME'] . ":" . $_SERVER['SERVER_PORT'];
+                //get file name
+                $fileName = $request['name'] . $request['dob'] . "." . $request->file('img')->getClientOriginalExtension();
+                //save img in storage public/img
+                $request->file('img')->storeAs('public/img', $fileName);
+                $path = $serverName . "/storage" . '/img/' . $fileName;
+                $img = $path;
+            }
+            if (count($mb) > 0) {
+                return response()->json(['error' => 'Thành viên này đã tồn tại']);
+            }
+            //check $request['dod'] != ""
+
+            if ($request['dod'] != "") {
+                $dod = $request['dod'];
+            }
+
+            //check father_id
+            if ($request['father_id'] != 0) {
+                $father_id = $request['father_id'];
+            }
+
+            //check mother_id
+            if ($request['mother_id'] != 0) {
+                $mother_id = $request['mother_id'];
+            }
 
 
-        $mb = Members::where('name', '=', $request['name'])->where('dob', '=', $request['dob'])->where('gender', '=', $request['gender'])->get();
-        $img = "https://icon-library.com/images/no-user-image-icon/no-user-image-icon-27.jpg";
-        if ($request->hasFile('img')) {
-            //get name and port of server
-            $serverName = "http://" . $_SERVER['SERVER_NAME'] . ":" . $_SERVER['SERVER_PORT'];
-            //get file name
-            $fileName = $request['name'] . $request['dob'] . "." . $request->file('img')->getClientOriginalExtension();
-            //save img in storage public/img
-            $request->file('img')->storeAs('public/img', $fileName);
-            $path = $serverName . "/storage" . '/img/' . $fileName;
-            $img = $path;
-        }
-        if (count($mb) > 0) {
-            return response()->json(['error' => 'Thành viên này đã tồn tại']);
-        }
-        //check $request['dod'] != ""
-
-        if ($request['dod'] != "") {
-            $dod = $request['dod'];
-        }
-
-        //check father_id
-        if ($request['father_id'] != 0) {
-            $father_id = $request['father_id'];
-        }
-
-        //check mother_id
-        if ($request['mother_id'] != 0) {
-            $mother_id = $request['mother_id'];
-        }
+            //check couple_id
+            if (count($request['couple_id']) > 1) {
+                //$request['couple_id'] to string
+                $couple_id = implode(",", $request['couple_id']);
+            } else if (count($request['couple_id']) == 1) {
+                $couple_id = $request['couple_id'][0];
+            }
 
 
-        //check couple_id
-        if (count($request['couple_id']) > 1) {
-            //$request['couple_id'] to string
-            $couple_id = implode(",", $request['couple_id']);
-        } else if (count($request['couple_id']) == 1) {
-            $couple_id = $request['couple_id'][0];
-        }
+            $members =  Members::create([
+                'family_tree_id' => Auth::user()->familyTree[0]->id,
+                'name' => $request['name'],
+                'dob' => $request['dob'],
+                'dod' => $dod,
+                'gender' => $request['gender'],
+                'img' => $img,
+                'father_id' => $father_id,
+                'mother_id' => $mother_id,
+                'couple_id' => $couple_id
+            ]);
 
+            if (count($request['couple_id']) >= 1) {
+                foreach ($request['couple_id'] as $couple) {
+                    if ($couple != 0) {
+                        $partner = Members::find($couple);
+                        $idremove =  str_replace(",", " ", $partner->couple_id);
 
-        $members =  Members::create([
-            'family_tree_id' => Auth::user()->familyTree[0]->id,
-            'name' => $request['name'],
-            'dob' => $request['dob'],
-            'dod' => $dod,
-            'gender' => $request['gender'],
-            'img' => $img,
-            'father_id' => $father_id,
-            'mother_id' => $mother_id,
-            'couple_id' => $couple_id
-        ]);
-
-        if (count($request['couple_id']) >= 1) {
-            foreach ($request['couple_id'] as $couple) {
-                if ($couple != 0) {
-                    $partner = Members::find($couple);
-                    $idremove =  str_replace(",", " ", $partner->couple_id);
-
-                    if (!str_contains($idremove, $members->id)) {
-                        if ($partner->couple_id == null) {
-                            $partner->couple_id = $members->id;
-                        } else {
-                            $partner->couple_id = $partner->couple_id . "," . $members->id;
+                        if (!str_contains($idremove, $members->id)) {
+                            if ($partner->couple_id == null) {
+                                $partner->couple_id = $members->id;
+                            } else {
+                                $partner->couple_id = $partner->couple_id . "," . $members->id;
+                            }
                         }
+                        $partner->save();
                     }
-                    $partner->save();
                 }
             }
         }
-
         return response()->json(['success' => 'Thành công'], 200);
     }
 

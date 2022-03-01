@@ -46,8 +46,12 @@
         //btnAdd click set value for action to add
         $('#btnAdd').click(function() {
             $('#action').val('add');
+            
             //set tile for modal
             $('#modalTitle').text('Thêm thành viên');
+            $('#addMember')[0].reset();
+            $('#couple_id').val(["0"]).change();
+
         });
 
 
@@ -87,7 +91,8 @@
         function getMember(id) {
             $('#action').val('update');
             $('#modalTitle').text('Cập nhật thành viên');
-
+            $('#addMember')[0].reset();
+            $('#couple_id').val(["0"]).change();
             $.ajax({
                 url: "{{ route('members') }}/" + id,
                 type: 'GET',
