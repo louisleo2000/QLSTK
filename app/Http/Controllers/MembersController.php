@@ -20,26 +20,26 @@ class MembersController extends Controller
     public function index()
     {
 
-        $male = [];
-        $female = [];
-        $couple = [];
-        //check family tree
-        $family_tree = Auth::user()->familyTree;
-        // dd($family_tree);
-        if (count($family_tree) > 0) {
-            //get members male
-            $male = Members::where('family_tree_id', '=', Auth::user()->familyTree[0]->id)->where('gender', '=', 'male')->get();
+        // $male = [];
+        // $female = [];
+        // $couple = [];
+        // //check family tree
+        // $family_tree = Auth::user()->familyTree;
+        // // dd($family_tree);
+        // if (count($family_tree) > 0) {
+        //     //get members male
+        //     $male = Members::where('family_tree_id', '=', Auth::user()->familyTree[0]->id)->where('gender', '=', 'male')->get();
 
-            //get member female
-            $female = Members::where('family_tree_id', '=', Auth::user()->familyTree[0]->id)->where('gender', '=', 'female')->get();
+        //     //get member female
+        //     $female = Members::where('family_tree_id', '=', Auth::user()->familyTree[0]->id)->where('gender', '=', 'female')->get();
 
-            $couple = Members::where('family_tree_id', '=', Auth::user()->familyTree[0]->id)->get();
-        }
+        //     $couple = Members::where('family_tree_id', '=', Auth::user()->familyTree[0]->id)->get();
+        // }
 
         $data = array(
-            'female' => $female,
-            'male' => $male,
-            'couples' => $couple,
+            // 'female' => $female,
+            // 'male' => $male,
+            // 'couples' => $couple,
             'title' => 'Thành viên',
             'active' => 2
         );
@@ -139,12 +139,11 @@ class MembersController extends Controller
                 $mother_id = $request['mother_id'];
             }
 
-
             //check couple_id
             if (count($request['couple_id']) > 1) {
                 //$request['couple_id'] to string
                 $couple_id = implode(",", $request['couple_id']);
-            } else if (count($request['couple_id']) == 1) {
+            } else if (count($request['couple_id']) == 1 && $request['couple_id'][0] != 0) {
                 $couple_id = $request['couple_id'][0];
             }
 

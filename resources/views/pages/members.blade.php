@@ -41,18 +41,22 @@
             </div>
         </div>
     </div>
-    @include('modal.add-member')
+    <livewire:modal-add-member /> 
     <script>
+        function resetForm(title,action='add'){
+            $('.js-select').select2();
+            $('#action').val(action);
+            $('#modalTitle').text(title);
+            $('#addMember')[0].reset();
+            $('#father_id').val(["0"]).change();
+            $('#mother_id').val(["0"]).change();
+            $('#couple_id').val(["0"]).change();  
+            console.log("reset form");
+        }
         //btnAdd click set value for action to add
         $('#btnAdd').click(function() {
-            $('#action').val('add');
-            
-            //set tile for modal
-            $('#modalTitle').text('Thêm thành viên');
-            $('#addMember')[0].reset();
-            $('#couple_id').val(["0"]).change();
-
-        });
+            resetForm('Thêm thành viên');
+        });          
 
 
         dob.max = new Date().toISOString().split("T")[0];
@@ -77,6 +81,7 @@
                     type: 'DELETE',
                     success: function(result) {
                         console.log(result);
+                        demo.showNotification('top', 'center', 2, 'Đã xóa thành công!');
                         //reload table
                         $('#members-table').DataTable().ajax.reload();
                     },
@@ -89,10 +94,7 @@
 
         //get member by ajax with id
         function getMember(id) {
-            $('#action').val('update');
-            $('#modalTitle').text('Cập nhật thành viên');
-            $('#addMember')[0].reset();
-            $('#couple_id').val(["0"]).change();
+            resetForm('Cập nhật thành viên','update');
             $.ajax({
                 url: "{{ route('members') }}/" + id,
                 type: 'GET',
@@ -119,18 +121,20 @@
 
 
                     //check father if have father
-                    if (result.father != null) {
-                        $('#father_id').val(result.father_id).change();;
+                    if (result.father_id != null) {
+                        $('#father_id').val(result.father_id).change();
+                        console.log("father: "+$('#father_id').val());
                     } else {
-                        $('#father').val(0);
+                        $('#father_id').val(0);
                     }
+                   
                     //check mother if have mother
-                    if (result.mother != null) {
+                    if (result.mother_id != null) {
                         $('#mother_id').val(result.mother_id).change();;
                     } else {
-                        $('#mother').val(0);
+                        $('#mother_id').val(0);
                     }
-
+                    console.log($('#mother_id').val())
                     //check if have couple_id and split to array and set to select
                     if (result.couple_id != null) {
                         var couple_id = result.couple_id.split(',');
@@ -138,6 +142,8 @@
                     } else {
                         $('#couple_id').val(["0"]).change();
                     }
+                    console.log($('#couple_id').val())
+                   
 
                     $('#addMemberModal').modal('show');
 

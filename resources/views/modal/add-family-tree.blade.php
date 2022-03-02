@@ -49,20 +49,10 @@
                 document.getElementById('btnAdd').style.display = "none"
                 $('#addFamilyTree').modal('hide');
                 Livewire.emit('refreshTree')
+                demo.showNotification('top', 'center', 2, 'Tạo gia phả thành công!');
             }).fail(function(jqXHR, ajaxOptions, thrownError) {
                 alert('Máy chủ không phản hồi...');
             });
-        // $.ajax({
-        //     type: "POST",
-        //     url: actionUrl,
-        //     data: form.serialize(), // serializes the form's elements.
-        //     dataType: "text",
-        //     alert("đã thêm");
-        //     success: function(data) {
-        //         alert(data);
-        //         // $("#addTree")[0].reset();
-        //     }
-        // });
-
     }
+    
 </script>
