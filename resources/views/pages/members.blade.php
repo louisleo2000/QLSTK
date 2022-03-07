@@ -23,7 +23,7 @@
                                 <thead class="thead-light">
                                     <tr>
                                         <th scope="col">id</th>
-                                        <th scope="col"></th>
+                                        <th scope="col" style="min-width: 48px"></th>
                                         <th scope="col">Họ và Tên</th>
                                         <th scope="col">Ngày sinh</th>
                                         <th scope="col">Ngày mất</th>

@@ -12,7 +12,7 @@
         </a>
         <!-- User -->
         <ul class="nav align-items-center d-md-none">
-            <li class="nav-item dropdown">
+            {{-- <li class="nav-item dropdown">
                 <a class="nav-link nav-link-icon" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
                     <i class="ni ni-bell-55"></i>
@@ -24,7 +24,7 @@
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">Something else here</a>
                 </div>
-            </li>
+            </li> --}}
             <li class="nav-item dropdown">
                 <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
@@ -40,25 +40,29 @@
                     </div>
                     <a href="./examples/profile.html" class="dropdown-item">
                         <i class="ni ni-single-02"></i>
-                        <span>My profile</span>
+                        <span>Thông tin cá nhân</span>
                     </a>
                     <a href="./examples/profile.html" class="dropdown-item">
                         <i class="ni ni-settings-gear-65"></i>
-                        <span>Settings</span>
+                        <span>Cài đặt</span>
                     </a>
-                    <a href="./examples/profile.html" class="dropdown-item">
+                    {{-- <a href="./examples/profile.html" class="dropdown-item">
                         <i class="ni ni-calendar-grid-58"></i>
                         <span>Activity</span>
-                    </a>
+                    </a> --}}
                     <a href="./examples/profile.html" class="dropdown-item">
                         <i class="ni ni-support-16"></i>
-                        <span>Support</span>
+                        <span>Hỗ trợ</span>
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a href="#!" class="dropdown-item">
-                        <i class="ni ni-user-run"></i>
-                        <span>Logout</span>
-                    </a>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <a href="route('logout')" class="dropdown-item" onclick="event.preventDefault();
+                    this.closest('form').submit();">
+                            <i class="ni ni-user-run"></i>
+                            <span>Đăng xuất</span>
+                        </a>
+                    </form>
                 </div>
             </li>
         </ul>
@@ -94,10 +98,10 @@
                     </div>
                 </div>
             </form>
-            
-                <!-- Navigation -->
-                <ul class="navbar-nav">
-                    @if (isset($active))
+
+            <!-- Navigation -->
+            <ul class="navbar-nav">
+                @if (isset($active))
                     @if ($active == 1)
                         <li class="nav-item  active ">
                             <a class="nav-link  " href="#">
@@ -105,33 +109,33 @@
                         <li class="nav-item ">
                             <a class="nav-link " href="{{ route('home') }}">
                     @endif
-                    @endif
+                @endif
 
-                    <i class="ni ni-tv-2 text-primary"></i> Trang chủ
-                    </a>
-                    </li>
-                    @if ($active == 2)
-                        <li class="nav-item  active ">
-                            <a class="nav-link  " href="#">
-                            @else
-                        <li class="nav-item ">
+                <i class="ni ni-tv-2 text-primary"></i> Trang chủ
+                </a>
+                </li>
+                @if ($active == 2)
+                    <li class="nav-item  active ">
+                        <a class="nav-link  " href="#">
+                        @else
+                    <li class="nav-item ">
 
-                            <a class="nav-link " href="{{ route('members') }}">
-                    @endif
-                    <i class="fas fa-users text-blue"></i> Thành viên
-                    </a>
-                    </li>
-                    {{-- <li class="nav-item">
+                        <a class="nav-link " href="{{ route('members') }}">
+                @endif
+                <i class="fas fa-users text-blue"></i> Thành viên
+                </a>
+                </li>
+                {{-- <li class="nav-item">
                     <a class="nav-link " href="./examples/maps.html">
                         <i class="ni ni-pin-3 text-orange"></i> Maps
                     </a>
                 </li> --}}
-                    <li class="nav-item">
-                        <a class="nav-link " href="./examples/profile.html">
-                            <i class="ni ni-single-02 text-orange"></i> Thông tin người dùng
-                        </a>
-                    </li>
-                    {{-- <li class="nav-item">
+                <li class="nav-item">
+                    <a class="nav-link " href="./examples/profile.html">
+                        <i class="ni ni-single-02 text-orange"></i> Thông tin người dùng
+                    </a>
+                </li>
+                {{-- <li class="nav-item">
                     <a class="nav-link " href="./examples/tables.html">
                         <i class="ni ni-bullet-list-67 text-red"></i> Tables
                     </a>
@@ -146,30 +150,30 @@
                         <i class="ni ni-circle-08 text-pink"></i> Register
                     </a>
                 </li> --}}
-                </ul>
-            
+            </ul>
+
             <!-- Divider -->
             <hr class="my-3">
             <!-- Heading -->
-            <h6 class="navbar-heading text-muted">Documentation</h6>
+            <h6 class="navbar-heading text-muted">Tài liệu</h6>
             <!-- Navigation -->
             <ul class="navbar-nav mb-md-3">
                 <li class="nav-item">
                     <a class="nav-link"
                         href="https://demos.creative-tim.com/argon-dashboard/docs/getting-started/overview.html">
-                        <i class="ni ni-spaceship"></i> Getting started
+                        <i class="ni ni-spaceship"></i>Bắt đầu
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"
                         href="https://demos.creative-tim.com/argon-dashboard/docs/foundation/colors.html">
-                        <i class="ni ni-palette"></i> Foundation
+                        <i class="ni ni-palette"></i> Quản lý thành viên
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"
                         href="https://demos.creative-tim.com/argon-dashboard/docs/components/alerts.html">
-                        <i class="ni ni-ui-04"></i> Components
+                        <i class="ni ni-ui-04"></i> Khác
                     </a>
                 </li>
             </ul>

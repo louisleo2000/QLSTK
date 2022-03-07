@@ -34,7 +34,7 @@
                             <label for="dob">Ngày sinh</label>
                             <div class="input-group input-group-alternative">
                                 <input class="form-control" placeholder="Ngày sinh" type="date" id="dob" name="dob"
-                                    required>
+                                    min="1600-01-01" required>
                             </div>
                         </div>
                         {{-- checkbox --}}
@@ -126,16 +126,16 @@
     </div>
 
     <script>
-      
-
         $(document).ready(function() {
             $('#dead').change(function() {
                 if ($(this).is(":checked")) {
                     document.getElementById('doditem').style.display = "block";
                     $('#dod').prop('required', true);
+
                 } else {
                     document.getElementById('doditem').style.display = "none";
                     $('#dod').prop('required', false);
+                    $('#dod').val(null);
                 }
             });
         });
@@ -154,7 +154,9 @@
             var formData = new FormData($('#addMember')[0]);
 
             if ($('#dead').is(":checked")) {
+                dod.min = dob.value;
                 formData.append('dod', $('#dod').val());
+                
             } else {
                 formData.delete('dod');
             }
@@ -173,14 +175,17 @@
                 formData.delete('couple_id[]');
             }
 
-            var check = true;
-            for (var value of formData.values()) {
-                if (value == "") {
-                    check = false;
-                }
-                console.log(formData)
-            }
-            if (check) {
+            name = document.getElementById('name').validity.valid
+            dob = document.getElementById('dob').validity.valid
+            dod = document.getElementById('dod').validity.valid
+            img = document.getElementById('img').validity.valid
+            valid = [name, dob, dod, img].every(function(item) {
+                if(!item)
+                    return false;
+                return true;
+            });
+              
+            if (valid) {
                 let url = ""
                 let action = $('#action').val();
                 console.log(action);
@@ -194,11 +199,10 @@
                     default:
                         break;
                 }
-                console.log($('#couple_id').val())
+                // console.log($('#couple_id').val());
+                // alert(formData);
 
-
-
-                //add member by ajax
+                // add member by ajax
                 $.ajax({
                     url: url,
                     type: 'POST',

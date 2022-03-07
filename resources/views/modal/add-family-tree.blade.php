@@ -38,21 +38,21 @@
         console.log(actionUrl)
         $.ajax({
                 url: actionUrl,
-                type: "post",
+                type: "POST",
                 dataType: "text",
                 data: form.serialize(),
             })
             .done(function(response) {
                 console.log(response)
-                alert('Thao tác thành công!!');
                 $("#addTree")[0].reset();
-                document.getElementById('btnAdd').style.display = "none"
                 $('#addFamilyTree').modal('hide');
-                Livewire.emit('refreshTree')
-                demo.showNotification('top', 'center', 2, 'Tạo gia phả thành công!');
+                if (response) {
+                    document.getElementById('btnAdd').style.display = "none"
+                    alert('Tạo gia phả thành công!');
+                    location.reload();
+                }
             }).fail(function(jqXHR, ajaxOptions, thrownError) {
                 alert('Máy chủ không phản hồi...');
             });
     }
-    
 </script>

@@ -10,15 +10,21 @@
 
 </style>
 <div>
-    @if (count(Auth::user()->familyTree) > 0)
+    @if ($name)
         <div class="text-center">
-            <h1>{{ Auth::user()->familyTree[0]->name }}</h1>
+            <h1>{{ $name }}</h1>
+
         </div>
 
-        <div style="width:100%; height:auto;" id="tree"></div>
+        @if (count($members) > 0)
+            <div style="width:100%; height:auto;" id="tree"></div>
+        @else
+            <a href="{{ route('members') }}">Thêm thành viên vào gia phả</a>
+        @endif
     @endif
 </div>
 <script>
+    FamilyTree.SEARCH_PLACEHOLDER = "Tìm kiếm thành viên";
     FamilyTree.templates.tommy_male.plus =
         '<circle cx="0" cy="0" r="15" fill="#ffffff" stroke="#aeaeae" stroke-width="1"></circle>' +
         '<line x1="-11" y1="0" x2="11" y2="0" stroke-width="1" stroke="#aeaeae"></line>' +
@@ -97,13 +103,13 @@
         },
         menu: {
             pdf: {
-                text: "Export PDF"
+                text: "Xuất ra PDF"
             },
             png: {
-                text: "Export PNG"
+                text: "Xuất ra PNG"
             },
             svg: {
-                text: "Export SVG"
+                text: "Xuất ra SVG"
             },
         },
         nodeMenu: {

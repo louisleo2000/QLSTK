@@ -63,7 +63,11 @@ class MembersController extends Controller
             })
             ->editColumn('dod', function ($request) {
                 //format dod to dd/mm/yyyy
-                $dod = date('d/m/Y', strtotime($request->dod));
+                $dod = "Chưa có";
+                if($request->dod != null){
+                    $dod = date('d/m/Y', strtotime($request->dod));
+                    return $dod;
+                }
                 return $dod;
             })
             ->addColumn('action', function ($row) {
@@ -223,6 +227,9 @@ class MembersController extends Controller
             //check $request['dod'] != ""
             if ($request['dod'] != "") {
                 $dod = $request['dod'];
+            }else
+            {
+                $dod = null;
             }
 
             //check father_id

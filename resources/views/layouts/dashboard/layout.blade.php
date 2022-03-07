@@ -11,10 +11,12 @@
     <div class="main-content">
         <!-- Navbar -->
         @include('layouts.dashboard.top-nav')
+        
         <!-- End Navbar -->
         <!-- Header -->
         <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
-            @include('layouts.dashboard.header')
+            {{-- @include('layouts.dashboard.header') --}}
+            <livewire:top-nav />
         </div>
         <div class="container-fluid mt--7">
             @yield('content')
