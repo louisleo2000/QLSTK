@@ -3,6 +3,7 @@
 use App\Http\Controllers\FamilyTreeController;
 use App\Http\Controllers\MembersController;
 use App\Http\Controllers\Pages\HomeController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,6 +23,11 @@ Route::get('/setup
     return view('pages.setup');
 })->middleware(['auth'])
     ->name('setup');
+
+Route::get('profile', [ProfileController::class, 'edit'])->middleware(['auth'])->name('profile.edit');
+Route::put('profile', [ProfileController::class, 'update'])->middleware(['auth'])->name('profile.update');
+Route::put('profile/password', [ProfileController::class, 'password'])->name('profile.password');
+
 Route::get('/home', [HomeController::class, 'index'])->middleware(['auth'])->name('home');
 
 Route::get('/members', [MembersController::class, 'index'])->middleware(['auth'])->name('members');

@@ -18,28 +18,8 @@ class MembersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-
-        // $male = [];
-        // $female = [];
-        // $couple = [];
-        // //check family tree
-        // $family_tree = Auth::user()->familyTree;
-        // // dd($family_tree);
-        // if (count($family_tree) > 0) {
-        //     //get members male
-        //     $male = Members::where('family_tree_id', '=', Auth::user()->familyTree[0]->id)->where('gender', '=', 'male')->get();
-
-        //     //get member female
-        //     $female = Members::where('family_tree_id', '=', Auth::user()->familyTree[0]->id)->where('gender', '=', 'female')->get();
-
-        //     $couple = Members::where('family_tree_id', '=', Auth::user()->familyTree[0]->id)->get();
-        // }
-
+    {   
         $data = array(
-            // 'female' => $female,
-            // 'male' => $male,
-            // 'couples' => $couple,
             'title' => 'Thành viên',
             'active' => 2
         );
@@ -72,8 +52,8 @@ class MembersController extends Controller
             })
             ->addColumn('action', function ($row) {
 
-                $btn = '<a onclick="getMember(' . $row->id . ')"  class="edit btn btn-primary btn-sm">Sửa</a>';
-                $btn = $btn . '<a onclick="deleteMember(' . $row->id . ')" class="edit btn btn-danger btn-sm">Xóa</a>';
+                $btn = '<a onclick="getMember(' . $row->id . ')" style = "color: white"  class="edit btn btn-primary btn-sm">Sửa</a>';
+                $btn = $btn . '<a onclick="deleteMember(' . $row->id . ')" style = "color: white" class="edit btn btn-danger btn-sm">Xóa</a>';
 
                 return $btn;
             })

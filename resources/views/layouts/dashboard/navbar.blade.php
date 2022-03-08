@@ -38,7 +38,7 @@
                     <div class=" dropdown-header noti-title">
                         <h6 class="text-overflow m-0">Welcome!</h6>
                     </div>
-                    <a href="./examples/profile.html" class="dropdown-item">
+                    <a href="{{ route('profile.edit') }}" class="dropdown-item">
                         <i class="ni ni-single-02"></i>
                         <span>Thông tin cá nhân</span>
                     </a>
@@ -131,7 +131,14 @@
                     </a>
                 </li> --}}
                 <li class="nav-item">
-                    <a class="nav-link " href="./examples/profile.html">
+                    @if ($active == 3)
+                <li class="nav-item  active ">
+                    <a class="nav-link  " href="#">
+                    @else
+                <li class="nav-item ">
+
+                    <a class="nav-link " href="{{ route('profile.edit') }}">
+                        @endif
                         <i class="ni ni-single-02 text-orange"></i> Thông tin người dùng
                     </a>
                 </li>

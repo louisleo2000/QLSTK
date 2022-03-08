@@ -18,10 +18,10 @@ class ModalAddMember extends Component
         // dd($family_tree);
         if (Auth::user()->familyTree->count() > 0) {
             //get members male
-            $this->male = Members::where('family_tree_id', '=', Auth::user()->familyTree[0]->id)->where('gender', '=', 'male')->get();
+            $this->male = Members::where('family_tree_id', '=', Auth::user()->familyTree[0]->id)->where('gender', '=', 'male')->where('couple_id', '!=', null)->get();
 
             //get member female
-            $this->female = Members::where('family_tree_id', '=', Auth::user()->familyTree[0]->id)->where('gender', '=', 'female')->get();
+            $this->female = Members::where('family_tree_id', '=', Auth::user()->familyTree[0]->id)->where('gender', '=', 'female')->where('couple_id', '!=', null)->get();
 
             $this->couples = Members::where('family_tree_id', '=', Auth::user()->familyTree[0]->id)->get();
         }

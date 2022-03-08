@@ -148,6 +148,33 @@
         dob.onchange = function() {
             dod.min = this.value;
         };
+        father_id.onchange = function() {
+            if (this.value == 0) {
+                mother_id.value = 0;
+            } else {
+                var motherlist = <?php echo json_encode($female); ?>;
+                var fatherlist = <?php echo json_encode($male); ?>;
+                var f = fatherlist.filter((father) => {
+                    return father.id == this.value
+                });
+                if (f[0].couple_id != null) {
+                    listPids = f[0].couple_id.split(",");
+                    m = [];
+                    listPids.forEach(id => {
+                        m = motherlist.filter((mother) => {
+                            return mother.id == id
+                        })
+                    });
+                    console.log(m)
+                    $('#mother_id').val([m[0].id]).change();
+                    console.log(mother_id.value)
+                }
+                else
+                {
+                    $('#mother_id').val(['0']).change();
+                }
+            }
+        };
 
         //up load image by ajax 
         function addOrUpdateMember(action) {
@@ -156,7 +183,7 @@
             if ($('#dead').is(":checked")) {
                 dod.min = dob.value;
                 formData.append('dod', $('#dod').val());
-                
+
             } else {
                 formData.delete('dod');
             }
@@ -180,11 +207,11 @@
             dod = document.getElementById('dod').validity.valid
             img = document.getElementById('img').validity.valid
             valid = [name, dob, dod, img].every(function(item) {
-                if(!item)
+                if (!item)
                     return false;
                 return true;
             });
-              
+
             if (valid) {
                 let url = ""
                 let action = $('#action').val();

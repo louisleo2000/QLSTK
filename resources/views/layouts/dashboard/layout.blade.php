@@ -21,8 +21,9 @@
         <div class="container-fluid mt--7">
             @yield('content')
             
+            @include('layouts.dashboard.footer')
         </div>
-        @include('layouts.dashboard.footer')
+        
     </div>
 
     @livewireScripts
